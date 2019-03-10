@@ -1,8 +1,28 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
+
+//create array of books
+let bookList = [
+    {
+        "title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages":260
+    },
+    {
+        "title": "Imagine Heaven",
+        "author": "John Doe",
+        "pages": 495
+    },
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "pages": 281
+    }
+]
+
+
 const style = {
     fontWeight: '700',
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    color: 'grey'
     
 }
 const Book = ({title, author, pages}) => {
@@ -15,13 +35,18 @@ const Book = ({title, author, pages}) => {
 
     )
 }
-const Library = () => {
+const Library = ({books}) => {
     return(
         <div>
             <h1>Welcome to the Library</h1>
-            <Book title="The Sun Also Rises" author="Ernest Hemingway" pages={260} />
-            <Book title="Imagine Heaven" author="John Doe" pages={495} />
-            <Book title="To Kill a Mockingbird" author="Harper Lee" pages={281} />
+            {books.map(
+                (book, i) => 
+                <Book 
+                    key={i}
+                    title={book.title} 
+                    author={book.author} 
+                    pages={book.pages}/>
+            )}
         </div>
 
     )
@@ -29,7 +54,7 @@ const Library = () => {
 }
 
 render(
-        <Library />,
+        <Library books={bookList} />,
    
     document.getElementById('root')
 )
